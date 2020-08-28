@@ -12,7 +12,6 @@ for ($i = 0; $i < count($toks); $i++) {
         (is_array($token) && token_name($token[0]) == 'T_CLOSE_TAG')) {
         // echo '**NEW COMMAND',"\n";
         analyzeMe($build_tag);
-        print_r($build_tag);
         $build_tag = array();
     } else if (is_array($token) && token_name($token[0]) == 'T_INLINE_HTML') {
         // we can ignore inline html for now
@@ -52,11 +51,6 @@ function analyzeMe($array) {
     $method_hit = array('$_GET', '$_POST', '$_REQUEST');
     foreach ($method_hit as $k => $v) {
         if (in_array($v, $values)) {
-            if (in_array('=', $values)) {
-                echo array_keys($values, '=')[0];
-                print_r($values);
-                exit;
-            } else 
             if (! in_array('htmlspecialchars', $values) && in_array('echo', $values)) {
                 echo 'lines: '. join(',', $ln);
                 echo " ( ";
